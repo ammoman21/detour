@@ -22,9 +22,15 @@ struct SettingsView: View {
                         Keychain.setAPIKey(newValue)
                         onAPIKeyChange()
                     }
-                Text("Stored in your keychain. Create one at console.anthropic.com → API Keys.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                if apiKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Text("Stored in your keychain. Create one at console.anthropic.com → API Keys.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Label("Saved to your keychain — saves as you type, no Enter needed. Close this window and press the hotkey.", systemImage: "checkmark.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                }
             }
 
             Section {
